@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block header %}  {% include 'header.html' %} {% endblock header %}
+    
+{% block content %}
+<main>
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="contact-title">Login Page</h2>
+                </div>
+                {% if messages %}
+                    {% for message in messages  %}
+                    <div  class="alert alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message.name}}
+                        {{ message }}
+                    </div>									  
+                    {% endfor %}								  
+                {% endif %}
+                <div class="col-lg-8">
+                    <form class="form-contact contact_form" action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control valid" name="username" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'username'" placeholder="username">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control valid" name="password" id="password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'" placeholder="password">
+                                </div>
+                            </div>
+                        </div>
+                        <h5>have no account?<a href="{% url 'register' %}">register</a></h5>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ contact section end ================= -->
+</main>
+{% endblock content %}
+
+
+{% block footer %}  {% include 'footer.html' %} {% endblock footer %}
+    
