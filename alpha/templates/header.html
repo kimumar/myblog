@@ -3,7 +3,7 @@
 <style>
     .hello-msg{
         font-size: 18px;
-        color: #fff;
+        color: white;
         margin-right: 20px;
     }
 </style>
@@ -63,7 +63,14 @@
                                         <li><a href="{% url 'index' %}">Home</a></li>
                                         <li><a href="{% url 'about' %}">about</a></li>
                                         <li><a href="{% url 'contact' %}">Contact</a></li>
+                                        {% if user.is_authenticated %}
+                                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                                        {% else %}
+                                        <li><a href="{% url 'register' %}">Register</a></li>
+                                        <li><a href="{% url 'login' %}">Login</a></li>
+                                        {% endif %}
                                     </ul>
+                                    
                                 </nav>
                             </div>
                         </div>             
@@ -74,10 +81,6 @@
                                     
                                     {% if user.is_authenticated %}
                                     <span class="hello-msg">Hello, {{user.username}}</span>
-                                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                                    {% else %}
-                                    <li><a href="{% url 'register' %}">Register</a></li>
-                                    <li><a href="{% url 'login' %}">Login</a></li>
                                     {% endif %}
                                 </ul>
                                 <!-- Search Nav -->
@@ -89,6 +92,7 @@
                         <!-- Mobile Menu -->
                         <div class="col-12">
                             <div class="mobile_menu d-block d-md-none"></div>
+                            
                         </div>
                     </div>
                 </div>

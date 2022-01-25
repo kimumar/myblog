@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, PostForm, CommentMessage, CommentForm, Sub, SubForm
+from .models import Post, PostForm, CommentMessage, CommentForm, Sub, SubForm, ContactMessage, ContactForm
 from django.contrib import messages
 from user.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.decorators import login_required
@@ -100,17 +100,17 @@ def about(request):
 @login_required
 def contact(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
+        forms = ContactForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            messages.success(request,"Thanks! Our Customer Service Will Get Back To You Shortly.....")
+            return redirect('contact')
         
+    forms = ContactForm
 
-        send_mail(
-            name,
-            message,
-            'kimumar55@gmail.com',
-            ['oladeleumaradisa19@gmail.com'],
-            fail_silently=False)
+    context = {
+        'forms': forms,
+    }
     
     return render(request, 'contact.html')
 

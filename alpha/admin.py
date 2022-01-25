@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Post, CommentMessage, Sub
+from . models import Post, CommentMessage, Sub, ContactMessage
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'post')
@@ -14,8 +14,11 @@ class CommentMessageAdmin(admin.ModelAdmin):
 
 class SubAdmin(admin.ModelAdmin):
     list_display = ('email',)
+    
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(CommentMessage, CommentMessageAdmin)
 admin.site.register(Sub, SubAdmin)
-
+admin.site.register(ContactMessage, ContactMessageAdmin)

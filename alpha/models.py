@@ -80,3 +80,20 @@ class SubForm(ModelForm):
     class Meta:
         model = Sub
         fields = ['email']
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=80, blank=True, null=True)
+    subject = models.CharField(blank=True, null=True, max_length=200)
+    message = models.TextField(blank=True, null=True, max_length=2000)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name or ""
+
+
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'subject', 'message']
